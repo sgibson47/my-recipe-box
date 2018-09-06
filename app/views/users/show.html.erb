@@ -1,1 +1,5 @@
 <h1><%=@user.name%>'s Page </h1>
+
+<% @user.recipes.each do |r|%>
+  <%= link_to "#{r.name}", "/recipes/#{r.id}"%><br>
+<%end%>
