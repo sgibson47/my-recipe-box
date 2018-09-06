@@ -6,16 +6,13 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
-    @recipe.save
-    # won't save without a user 
-    # i guess we make sessions next so we can associate with with the current user
-    raise @recipe.errors.inspect
+    @recipe.user = current_user
     return redirect_to controller: 'recipes', action: 'new' unless @recipe.save
     redirect_to recipe_path(@recipe)
   end
 
   def show
-    @recipe = Recipe.find(:id)
+    @recipe = Recipe.find(params[:id])
   end
 
   private 
